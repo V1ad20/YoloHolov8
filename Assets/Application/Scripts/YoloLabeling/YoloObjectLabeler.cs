@@ -15,6 +15,9 @@ namespace YoloHolo.YoloLabeling
         private GameObject labelObject;
 
         [SerializeField]
+        private GameObject InfoPane;
+
+        [SerializeField]
         private int cameraFPS = 4;
 
         [SerializeField]
@@ -41,7 +44,7 @@ namespace YoloHolo.YoloLabeling
 
         private IYoloProcessor yoloProcessor;
 
-        private readonly List<YoloGameObject> yoloGameObjects = new();
+        private List<YoloGameObject> yoloGameObjects = new();
 
 
         private void Start()
@@ -81,7 +84,7 @@ namespace YoloHolo.YoloLabeling
         }
 
 
-        private void ShowRecognitions(List<YoloItem> recognitions, Transform cameraTransform)
+        /*private void ShowRecognitions(List<YoloItem> recognitions, Transform cameraTransform)
         {
             foreach (var recognition in recognitions)
             {
@@ -109,11 +112,12 @@ namespace YoloHolo.YoloLabeling
                     yoloGameObjects.RemoveAt(i);
                 }
             }
-        }
+        }*/
 
 
-        /*private void ShowRecognitions(List<YoloItem> recognitions, Transform cameraTransform)
+        private void ShowRecognitions(List<YoloItem> recognitions, Transform cameraTransform)
         {
+           
             foreach (var recognition in recognitions)
             {
                 var newObj = new YoloGameObject(recognition, cameraTransform,
@@ -121,22 +125,42 @@ namespace YoloHolo.YoloLabeling
                 if (newObj.PositionInSpace != null)
                 {
                     int potentialAlreadyPlacedLabelIndex = GetIndexOfPotentialAlreadyPlacedLabel(newObj);
+                    Debug.Log(potentialAlreadyPlacedLabelIndex);
                     if (potentialAlreadyPlacedLabelIndex < 0)
                     {
                         yoloGameObjects.Add(newObj);
                         newObj.DisplayObject = Instantiate(labelObject,
                             newObj.PositionInSpace.Value, Quaternion.identity);
                         newObj.DisplayObject.transform.parent = transform;
-                        var labelController = newObj.DisplayObject.GetComponent<ObjectLabelController>();
+                        var labelController = newObj.DisplayObject.GetComponent<InfoPromptController>();
                         labelController.SetText(newObj.Name);
+                        labelController.InfoPane = InfoPane;
+                        labelController.InfoText = newObj.ObjectName;
                     }
                     else
                     {
-                        if (rec)
+                        YoloGameObject temp = yoloGameObjects[potentialAlreadyPlacedLabelIndex];
+                        if (newObj.YoloItem.Confidence > temp.YoloItem.Confidence)
+                        {
+                            Destroy(temp.DisplayObject);
+                            yoloGameObjects[potentialAlreadyPlacedLabelIndex] = newObj;
+
+                            newObj.DisplayObject = Instantiate(labelObject,
+                           newObj.PositionInSpace.Value, Quaternion.identity);
+                            newObj.DisplayObject.transform.parent = transform;
+                            var labelController = newObj.DisplayObject.GetComponent<InfoPromptController>();
+                            labelController.SetText(newObj.Name);
+                            labelController.InfoPane = InfoPane;
+                            labelController.InfoText = newObj.ObjectName;
+                        }
+                        else
+                        {
+                            temp.TimeLastSeen = Time.time;
+                        }
                     }
                     //get potential duplicate label (ie close to existing label indicating same object)
                     //if duplicate label has confidence less than existing ..
-                    
+
                     //else, replace the exiting object
                 }
             }
@@ -149,9 +173,9 @@ namespace YoloHolo.YoloLabeling
                     yoloGameObjects.RemoveAt(i);
                 }
             }
-        }*/
+        }
 
-        private bool HasBeenSeenBefore(YoloGameObject obj)
+        /*private bool HasBeenSeenBefore(YoloGameObject obj)
         {
             var seenBefore = yoloGameObjects.FirstOrDefault(
                 ylo => ylo.Name == obj.Name &&
@@ -162,22 +186,24 @@ namespace YoloHolo.YoloLabeling
                 seenBefore.TimeLastSeen = Time.time;
             }
             return seenBefore != null;
-        }
+        }*/
 
-       /* private int GetIndexOfPotentialAlreadyPlacedLabel(YoloGameObject obj)
+        private int GetIndexOfPotentialAlreadyPlacedLabel(YoloGameObject obj)
         {
-            for(int i = 0; i < yoloGameObjects.count; i++)
+            for (int i = 0; i < yoloGameObjects.Count; i++)
             {
                 YoloGameObject ylo = yoloGameObjects[i];
-                if (ylo.Name == obj.Name && Vector3.Distance(obj.PositionInSpace.Value,
+                if (ylo.ObjectName == obj.ObjectName && Vector3.Distance(obj.PositionInSpace.Value,
                     ylo.PositionInSpace.Value) < minIdenticalLabelDistance)
                 {
+                   
                     return i;
+                    
                 }
             }
             return -1;
-        }*/
+        }
 
-        
+
     }
 }

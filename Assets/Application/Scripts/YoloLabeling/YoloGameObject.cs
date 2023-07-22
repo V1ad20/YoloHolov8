@@ -10,19 +10,24 @@ namespace YoloHolo.YoloLabeling
         public GameObject DisplayObject { get; set; }
         public Vector3? PositionInSpace { get; set; }
         public float TimeLastSeen { get; set; }
+        public YoloItem YoloItem { get; }
+        public string ObjectName { get;  }
 
         private const int MaxLabelDistance = 10;
         private const float SphereCastSize = 0.15f;
         private const string SpatialMeshLayerName  = "Spatial Mesh";
+        private GameObject InfoPane { get; set; }
 
         public YoloGameObject(
             YoloItem yoloItem, Transform cameraTransform, 
             Vector2Int cameraSize, Vector2Int yoloImageSize,
             float virtualProjectionPlaneWidth)
         {
+            YoloItem = yoloItem;
             ImagePosition = new Vector2(
                 (yoloItem.Center.x / yoloImageSize.x * cameraSize.x - cameraSize.x / 2) / cameraSize.x,
                 (yoloItem.Center.y / yoloImageSize.y * cameraSize.y - cameraSize.y / 2) / cameraSize.y);
+            ObjectName = yoloItem.MostLikelyObject;
             Name = $"{ yoloItem.MostLikelyObject}: {yoloItem.Confidence}";
 
             var virtualProjectionPlaneHeight = virtualProjectionPlaneWidth * cameraSize.y / cameraSize.x;

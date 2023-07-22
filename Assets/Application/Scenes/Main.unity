@@ -535,6 +535,92 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+--- !u!1001 &1708713685
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 951009076429837284, guid: 92e54eb43e676b9499cccc63b688339d, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1592325853444770467, guid: 92e54eb43e676b9499cccc63b688339d, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2680377478557818540, guid: 92e54eb43e676b9499cccc63b688339d, type: 3}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2680377478557818540, guid: 92e54eb43e676b9499cccc63b688339d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2680377478557818540, guid: 92e54eb43e676b9499cccc63b688339d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2680377478557818540, guid: 92e54eb43e676b9499cccc63b688339d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2680377478557818540, guid: 92e54eb43e676b9499cccc63b688339d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2680377478557818540, guid: 92e54eb43e676b9499cccc63b688339d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2680377478557818540, guid: 92e54eb43e676b9499cccc63b688339d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2680377478557818540, guid: 92e54eb43e676b9499cccc63b688339d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2680377478557818540, guid: 92e54eb43e676b9499cccc63b688339d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2680377478557818540, guid: 92e54eb43e676b9499cccc63b688339d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2680377478557818540, guid: 92e54eb43e676b9499cccc63b688339d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2680377478557818543, guid: 92e54eb43e676b9499cccc63b688339d, type: 3}
+      propertyPath: m_Name
+      value: InfoPane
+      objectReference: {fileID: 0}
+    - target: {fileID: 2680377478557818543, guid: 92e54eb43e676b9499cccc63b688339d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5101660660510540866, guid: 92e54eb43e676b9499cccc63b688339d, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6253652075333902861, guid: 92e54eb43e676b9499cccc63b688339d, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8623872316314199098, guid: 92e54eb43e676b9499cccc63b688339d, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 92e54eb43e676b9499cccc63b688339d, type: 3}
+--- !u!1 &1708713686 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2680377478557818543, guid: 92e54eb43e676b9499cccc63b688339d, type: 3}
+  m_PrefabInstance: {fileID: 1708713685}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1819025807
 GameObject:
   m_ObjectHideFlags: 0
@@ -564,12 +650,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52c0e92cf055c564b829178076690741, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  labelObject: {fileID: 5265608571350550316, guid: c1dea6da8253b9e488dc5c58cfccec2e, type: 3}
+  labelObject: {fileID: 5265608571350550316, guid: a027c2d9c11c2b54dafdcce5dcb726e1, type: 3}
+  InfoPane: {fileID: 1708713686}
   cameraFPS: 4
   requestedCameraSize: {x: 896, y: 504}
   yoloImageSize: {x: 320, y: 256}
   virtualProjectionPlaneWidth: 1.356
-  minIdenticalLabelDistance: 0.3
+  minIdenticalLabelDistance: 0.1
   labelNotSeenTimeOut: 5
   debugRenderer: {fileID: 2057650854}
 --- !u!4 &1819025809
